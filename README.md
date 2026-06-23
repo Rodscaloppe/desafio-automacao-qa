@@ -122,6 +122,12 @@ Para ativar o modo de cura em um teste falho, basta rodar:
 ```bash
 npm run heal
 ```
+
+### 🧠 Agent Skills (Diretrizes para IAs Assistentes)
+O repositório contém um diretório especial `[ .agents/skills/qa-engineering/ ]` dedicado a orquestrar como agentes de Inteligência Artificial (como Copilots e Assistentes de Código) devem se comportar ao interagir com o nosso projeto. 
+- **O que faz:** Ele injeta a persona de um **Tech Lead de QA** na inteligência artificial, forçando-a a adotar princípios rigorosos de qualidade (como aversão a *flaky tests*, foco em prevenção e cobertura de *edge cases*).
+- **Por que usamos:** Quando um dev ou QA utiliza uma IA para gerar novos cenários de testes no repositório, essa *Skill* atua como um "cão de guarda", garantindo que o código gerado respeite automaticamente as nossas padronizações e boas práticas antes de ser sugerido, mantendo a excelência do código.
+
 ## ☁️ CI/CD - GitHub Actions & Relatório Online (Pages)
 
 O arquivo `.github/workflows/qa_pipeline.yml` orquestra a execução automatizada. Sempre que houver um `push` ou `pull_request` nas branches principais, o GitHub Actions:
