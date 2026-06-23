@@ -8,7 +8,8 @@ O framework utiliza **BDD (Behavior-Driven Development)** em todas as suas camad
 
 - **Cypress + Cucumber/Gherkin**: Para os testes de Front-End (E2E).
 - **Multiple Cucumber HTML Reporter**: Geração de dashboard e evidências visuais.
-- **LangChain & Ollama**: Inteligência Artificial local para análise de causa raiz de falhas (RCA) com Llama 3.
+- **axe-core & cypress-axe**: Para automação de auditorias de acessibilidade (A11y) baseadas nas diretrizes WCAG.
+- **LangChain, LangGraph & Ollama**: Inteligência Artificial local para análise de causa raiz (RCA) e **Cura Automática (Self-Healing)** de seletores UI quebrados usando Llama 3.
 - **k6**: Para testes de Performance e Stress na API.
 - **Pact + Jest**: Para garantir o Contrato (Consumer-Driven Contract Testing) das integrações.
 - **GitHub Actions & GitHub Pages**: Pipeline automatizada (CI/CD) e hospedagem de relatórios na nuvem.
@@ -39,10 +40,11 @@ Atualmente possuímos cobertura automatizada nos seguintes cenários e regras de
 - ✅ **Newsletter** (Validação de inscrição via rodapé)
 - ✅ **Avaliações (Reviews)** (Publicação de avaliações nas páginas de produtos)
 - ✅ **Logout** (Redirecionamento ao sair do sistema)
+- ♿ **Acessibilidade (A11y)** (Auditoria automática de contraste, semântica e boas práticas WCAG na página inicial e login)
 
 ## 🚀 Instalação do Ambiente Local
 
-1. Certifique-se de ter o [Node.js](https://nodejs.org/) instalado.
+1. Certifique-se de ter o [Node.js](https://nodejs.org/) instalado (versão **20** ou superior recomendada).
 2. No terminal, execute o comando abaixo para instalar as dependências de E2E e Contrato:
 
 ```bash
@@ -107,7 +109,20 @@ Analisando os dados com LangChain + Ollama (llama3)...
 *Recomendação de correção:* Verificar se as alterações recentes no repositório afetaram a integração da API e realizar testes manuais para garantir que os elementos estejam presentes na página. Além disso, revisar o código do teste Cypress para garantir que ele esteja lidando corretamente com erros de API.
 ======================================================
 ```
-##  CI/CD - GitHub Actions & Relatório Online (Pages)
+```
+
+### 🤖 Agente Auto-Healing (Cura Automática de Seletores)
+Nossa arquitetura conta com uma inovação impressionante de "Self-Healing". Caso o Cypress quebre devido a um seletor não encontrado (por exemplo, um dev alterou um atributo HTML de um botão), nosso Agente LangGraph entra em ação:
+1. Ele coleta o HTML minificado do momento da falha.
+2. Injeta o erro no Llama3 pedindo a localização do novo seletor no DOM.
+3. **Edita localmente o código fonte** do seu Step Definition.
+4. Roda o Cypress sozinho para re-validar e deixar o teste verde!
+
+Para ativar o modo de cura em um teste falho, basta rodar:
+```bash
+npm run heal
+```
+## ☁️ CI/CD - GitHub Actions & Relatório Online (Pages)
 
 O arquivo `.github/workflows/qa_pipeline.yml` orquestra a execução automatizada. Sempre que houver um `push` ou `pull_request` nas branches principais, o GitHub Actions:
 1. Validará a integridade dos **Contratos (Pact)**.
