@@ -53,7 +53,6 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
-          build: npm run build
           command: npm run cy:run
 
       - name: Generate HTML Report
