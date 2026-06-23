@@ -21,6 +21,15 @@ class HomePage {
     cy.contains('Your product has been added to cart.').should('be.visible');
     cy.contains('Continue Shopping').click();
   }
+
+  subscribeNewsletter(email) {
+    cy.get('#susbscribe_email').type(email);
+    cy.get('#subscribe').click();
+  }
+
+  verifyNewsletterSuccess(message) {
+    cy.get('#success-subscribe').should('contain', message).and('be.visible');
+  }
 }
 
 export default new HomePage();

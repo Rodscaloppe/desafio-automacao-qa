@@ -6,10 +6,17 @@
   "scripts": {
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "test:contract": "jest contract/"
+    "test:contract": "jest contract/",
+    "report:generate": "node scripts/generate-report.js",
+    "cy:run:report": "npm run cy:run || true && npm run report:generate"
   },
   "cypress-cucumber-preprocessor": {
-    "stepDefinitions": "cypress/support/step_definitions/**/*.js"
+    "stepDefinitions": "cypress/support/step_definitions/**/*.js",
+    "json": {
+      "enabled": true,
+      "output": "cypress/reports/cucumber-json/cucumber-report.json",
+      "formatter": ".bin/cucumber-json-formatter"
+    }
   },
   "keywords": [],
   "author": "",
@@ -24,6 +31,7 @@
     "cypress": "^15.18.0",
     "esbuild": "^0.28.1",
     "faker": "^5.5.3",
-    "jest": "^30.4.2"
+    "jest": "^30.4.2",
+    "multiple-cucumber-html-reporter": "^3.10.0"
   }
 }

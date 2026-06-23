@@ -9,8 +9,8 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: "https://www.automationexercise.com",
     specPattern: "**/*.feature",
-    setupNodeEvents(on, config) {
-      addCucumberPreprocessorPlugin(on, config);
+    async setupNodeEvents(on, config) {
+      await addCucumberPreprocessorPlugin(on, config);
 
       on(
         "file:preprocessor",
@@ -24,6 +24,8 @@ module.exports = defineConfig({
     viewportWidth: 1280,
     viewportHeight: 720,
     video: false,
-    defaultCommandTimeout: 10000
+    defaultCommandTimeout: 10000,
+    screenshotsFolder: "cypress/screenshots",
+    screenshotOnRunFailure: true
   },
 });

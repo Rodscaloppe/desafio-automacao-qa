@@ -20,3 +20,18 @@ Then('eu devo estar logado com sucesso', () => {
 Then('minha conta deve ser deletada no final para limpeza de massa', () => {
   LoginPage.deleteAccount();
 });
+
+When('inicio o cadastro com um novo e-mail', () => {
+  const { faker } = require('@faker-js/faker');
+  const name = faker.name.firstName();
+  const email = faker.internet.email();
+  LoginPage.submitSignupStep1(name, email);
+});
+
+When('tento criar a conta sem preencher o campo obrigatório {string}', (fieldName) => {
+  LoginPage.fillPartialSignupForm(fieldName);
+});
+
+Then('o sistema deve alertar que o campo {string} é obrigatório com a mensagem {string}', (fieldName, message) => {
+  LoginPage.verifyFieldValidationMessage(fieldName, message);
+});
