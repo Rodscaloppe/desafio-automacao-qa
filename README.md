@@ -1,76 +1,75 @@
-# Desafio de Automação QA - Cypress + BDD (Cucumber)
+# Desafio de Automação QA - Cypress + K6 + Pact + GitHub Actions
 
-Este projeto contém a automação dos testes de ponta a ponta (E2E) para o site [Automation Exercise](https://www.automationexercise.com/login).
-O framework foi construído utilizando **Cypress**, com integração **BDD (Cucumber)**, escrito em **JavaScript**, e baseado na arquitetura **Page Object Model**.
+Este projeto contém a automação de ponta a ponta (E2E) para o site [Automation Exercise](https://www.automationexercise.com/login), além de contemplar as camadas de **Testes de Performance** e **Testes de Contrato**, geridos através de um pipeline CI/CD na nuvem.
+
+O framework utiliza **BDD (Behavior-Driven Development)** em todas as suas camadas de testes para manter legibilidade e conexão direta com as regras de negócio.
 
 ## 🛠 Tecnologias Utilizadas
 
-- **Node.js** (Ambiente de execução)
-- **Cypress** (Framework de teste E2E)
-- **Cucumber / Gherkin** (Para escrita dos cenários BDD)
-- **Esbuild** (Para processamento rápido e eficiente do Cypress com Cucumber)
-- **Faker.js** (Para geração de massa de dados dinâmicos, como e-mails e nomes para os testes de login)
+- **Cypress + Cucumber/Gherkin**: Para os testes de Front-End (E2E).
+- **k6**: Para testes de Performance e Stress na API.
+- **Pact + Jest**: Para garantir o Contrato (Consumer-Driven Contract Testing) das integrações.
+- **GitHub Actions**: Pipeline automatizada (CI/CD).
+- **Faker.js**: Massa de dados dinâmicas.
 
 ## 🏗 Arquitetura do Projeto
 
-A estrutura do projeto segue as melhores práticas para separar a lógica de teste da lógica de interação com as páginas.
-
 ```
-├── cypress/
-│   ├── e2e/
-│   │   └── features/           # Arquivos .feature com os cenários BDD em Gherkin
-│   ├── support/
-│   │   ├── pages/              # Classes de Page Objects (Login, Home, Cart, Checkout)
-│   │   ├── step_definitions/   # Implementação dos passos (Given, When, Then) do Gherkin
-│   │   ├── commands.js         # Comandos customizados do Cypress
-│   │   └── e2e.js              # Configurações de suporte do Cypress
-├── cypress.config.js           # Arquivo de configuração do Cypress integrando o esbuild/cucumber
-├── package.json                # Dependências e scripts de execução
-└── README.md                   # Instruções do projeto
+├── .github/workflows/  # Pipeline do GitHub Actions (qa_pipeline.yml)
+├── contract/           # Testes de Contrato da API (Pact + Jest)
+├── cypress/            # Testes E2E (BDD com Cucumber e Page Objects)
+├── performance/        # Scripts K6 de Performance focados na API
+├── cypress.config.js   # Configuração do Cypress
+└── package.json        # Dependências e scripts de execução
 ```
 
-## 🚀 Instalação do Ambiente
+## 🚀 Instalação do Ambiente Local
 
-1. Certifique-se de ter o [Node.js](https://nodejs.org/) instalado em sua máquina.
-2. Clone o repositório ou navegue até a pasta do projeto.
-3. No terminal, execute o comando abaixo para instalar as dependências:
+1. Certifique-se de ter o [Node.js](https://nodejs.org/) instalado.
+2. No terminal, execute o comando abaixo para instalar as dependências de E2E e Contrato:
 
 ```bash
 npm install
 ```
 
+3. Para executar o **K6** localmente, você precisa ter a [CLI do k6 instalada](https://k6.io/docs/get-started/installation/) em sua máquina.
+
 ## 🏃 Execução dos Testes
 
-### Modo Interativo (Com interface gráfica)
-Para abrir a interface do Cypress e visualizar a execução dos testes passo a passo:
-
+### Testes E2E (Cypress BDD)
 ```bash
+# Executa de forma interativa (abre navegador)
 npm run cy:open
-```
-- Selecione a opção **E2E Testing**.
-- Escolha o seu navegador de preferência (Ex: Chrome).
-- Clique em qualquer um dos arquivos `.feature` listados para iniciar o teste.
 
-### Modo Headless (Em background)
-Para executar todos os testes diretamente no terminal de forma rápida e sem abrir interface:
-
-```bash
+# Executa de forma headless (background)
 npm run cy:run
 ```
 
-## 📝 Funcionalidades Cobertas (Desafio)
-
-1. **Login e Criação de Usuário**: O framework entra na tela, preenche o cadastro, valida a criação do usuário, realiza o login e, ao final de tudo, deleta a conta para manter a limpeza de massa.
-2. **Busca de Produtos**: Realiza a busca de produtos válidos e valida a apresentação dos mesmos.
-3. **Inclusão no Carrinho e Pagamento**: Adiciona produtos ao carrinho e navega para o fluxo de checkout garantindo a persistência do produto.
-4. **Cenários de Exceção**: Tenta logar com dados inválidos e valida as mensagens de erro retornadas pelo sistema.
-
-## 🔗 Informações Adicionais
-
-Este projeto foi inicializado com repositório Git local e pode ser facilmente "pushado" para um repositório remoto no GitHub ou Bitbucket. 
-
-Para enviar ao seu repositório remoto, basta executar:
+### Testes de Contrato (Pact)
+Os testes de contrato utilizam o Jest e sobem um mock server do Pact dinamicamente para simular a resposta da API e validar se o contrato definido em código respeita a tipagem esperada.
 ```bash
-git remote add origin <URL_DO_SEU_REPOSITORIO>
+npm run test:contract
+```
+
+### Testes de Performance (k6)
+No terminal, basta invocar a CLI do K6 apontando para o script desejado.
+```bash
+k6 run performance/login_perf.js
+k6 run performance/search_perf.js
+```
+
+## ⚙️ CI/CD - GitHub Actions
+
+O arquivo `qa_pipeline.yml` orquestra a execução automatizada. Sempre que houver um `push` ou `pull_request` nas branches principais, o GitHub Actions disparará os 3 jobs paralelamente:
+1. **Contract Tests**: Testa a integridade dos contratos.
+2. **Performance Tests**: Isola a carga e verifica os tempos de resposta.
+3. **E2E Tests**: Valida os fluxos completos em background no navegador da pipeline.
+
+## 🔗 Enviando ao Repositório Remoto
+
+Execute os comandos abaixo para "subir" esse framework para sua conta do GitHub. Os Actions rodarão automaticamente!
+
+```bash
+git remote add origin <URL_DO_SEU_GITHUB>
 git push -u origin master
 ```

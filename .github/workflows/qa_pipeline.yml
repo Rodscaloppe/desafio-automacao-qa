@@ -1,0 +1,67 @@
+name: QA Automation Pipeline
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+
+jobs:
+  contract-tests:
+    name: Contract Tests (Pact)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm ci || npm install
+
+      - name: Run Pact Contract Tests
+        run: npm run test:contract
+
+  e2e-tests:
+    name: E2E Tests (Cypress BDD)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm ci || npm install
+
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          command: npm run cy:run
+
+  performance-tests:
+    name: Performance Tests (k6)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup k6
+        uses: grafana/setup-k6-action@v1
+
+      - name: Run k6 Login Performance Test
+        run: k6 run performance/login_perf.js
+
+      - name: Run k6 Search Performance Test
+        run: k6 run performance/search_perf.js
