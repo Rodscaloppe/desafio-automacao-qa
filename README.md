@@ -1,27 +1,43 @@
 # Desafio de Automação QA - Cypress + K6 + Pact + GitHub Actions
 
-Este projeto contém a automação de ponta a ponta (E2E) para o site [Automation Exercise](https://www.automationexercise.com/login), além de contemplar as camadas de **Testes de Performance** e **Testes de Contrato**, geridos através de um pipeline CI/CD na nuvem.
+Este projeto contém a automação de ponta a ponta (E2E) para o site [Automation Exercise](https://www.automationexercise.com/), além de contemplar as camadas de **Testes de Performance** e **Testes de Contrato**, geridos através de um pipeline CI/CD na nuvem.
 
 O framework utiliza **BDD (Behavior-Driven Development)** em todas as suas camadas de testes para manter legibilidade e conexão direta com as regras de negócio.
 
 ## 🛠 Tecnologias Utilizadas
 
 - **Cypress + Cucumber/Gherkin**: Para os testes de Front-End (E2E).
+- **Multiple Cucumber HTML Reporter**: Geração de dashboard e evidências visuais.
 - **k6**: Para testes de Performance e Stress na API.
 - **Pact + Jest**: Para garantir o Contrato (Consumer-Driven Contract Testing) das integrações.
-- **GitHub Actions**: Pipeline automatizada (CI/CD).
-- **Faker.js**: Massa de dados dinâmicas.
+- **GitHub Actions & GitHub Pages**: Pipeline automatizada (CI/CD) e hospedagem de relatórios na nuvem.
+- **Faker.js**: Geração de massa de dados dinâmicas.
 
 ## 🏗 Arquitetura do Projeto
 
-```
-├── .github/workflows/  # Pipeline do GitHub Actions (qa_pipeline.yml)
+```text
+├── .github/workflows/  # Pipeline do GitHub Actions (Deploy automático)
 ├── contract/           # Testes de Contrato da API (Pact + Jest)
 ├── cypress/            # Testes E2E (BDD com Cucumber e Page Objects)
+│   ├── e2e/features/   # Nossos 10 cenários de testes mapeados
+│   ├── reports/html/   # Relatórios gerados em HTML (evidências)
+│   └── support/pages/  # Page Object Model (POM)
 ├── performance/        # Scripts K6 de Performance focados na API
-├── cypress.config.js   # Configuração do Cypress
+├── cypress.config.js   # Configuração do Cypress (com screenshots ligados)
 └── package.json        # Dependências e scripts de execução
 ```
+
+## 📝 Funcionalidades Cobertas (E2E)
+
+Atualmente possuímos cobertura automatizada nos seguintes cenários e regras de negócio:
+- ✅ **Login e Cadastro** (Sucesso na criação de conta; Validação de campos obrigatórios do HTML5; Mensagens de erro para e-mail existente)
+- ✅ **Carrinho e Checkout** (Inclusão e persistência do carrinho)
+- ✅ **Busca de Produtos** (Fluxo de busca via barra superior)
+- ✅ **Exceções e Falhas** (Login com credenciais inválidas)
+- ✅ **Fale Conosco** (Envio do formulário de *Contact Us*)
+- ✅ **Newsletter** (Validação de inscrição via rodapé)
+- ✅ **Avaliações (Reviews)** (Publicação de avaliações nas páginas de produtos)
+- ✅ **Logout** (Redirecionamento ao sair do sistema)
 
 ## 🚀 Instalação do Ambiente Local
 
@@ -32,17 +48,20 @@ O framework utiliza **BDD (Behavior-Driven Development)** em todas as suas camad
 npm install
 ```
 
-3. Para executar o **K6** localmente, você precisa ter a [CLI do k6 instalada](https://k6.io/docs/get-started/installation/) em sua máquina.
+3. Para executar o **K6** localmente, instale a [CLI do k6](https://k6.io/docs/get-started/installation/) em sua máquina.
 
 ## 🏃 Execução dos Testes
 
 ### Testes E2E (Cypress BDD)
 ```bash
-# Executa de forma interativa (abre navegador)
+# Executa de forma interativa (Modo Visual - abre o navegador)
 npm run cy:open
 
-# Executa de forma headless (background)
+# Executa de forma silenciosa (Headless - ideal para o CI)
 npm run cy:run
+
+# Executa os testes em Headless e GERA O RELATÓRIO HTML AUTOMATICAMENTE ao final
+npm run cy:run:report
 ```
 
 ### Testes de Contrato (Pact)
@@ -58,18 +77,13 @@ k6 run performance/login_perf.js
 k6 run performance/search_perf.js
 ```
 
-## ⚙️ CI/CD - GitHub Actions
+## ⚙️ CI/CD - GitHub Actions & Relatório Online (Pages)
 
-O arquivo `qa_pipeline.yml` orquestra a execução automatizada. Sempre que houver um `push` ou `pull_request` nas branches principais, o GitHub Actions disparará os 3 jobs paralelamente:
-1. **Contract Tests**: Testa a integridade dos contratos.
-2. **Performance Tests**: Isola a carga e verifica os tempos de resposta.
-3. **E2E Tests**: Valida os fluxos completos em background no navegador da pipeline.
+O arquivo `.github/workflows/qa_pipeline.yml` orquestra a execução automatizada. Sempre que houver um `push` ou `pull_request` nas branches principais, o GitHub Actions:
+1. Validará a integridade dos **Contratos (Pact)**.
+2. Isolará a carga verificando os tempos de resposta através da **Performance (K6)**.
+3. Executará os fluxos de Interface em background **(Cypress BDD)**.
 
-## 🔗 Enviando ao Repositório Remoto
-
-Execute os comandos abaixo para "subir" esse framework para sua conta do GitHub. Os Actions rodarão automaticamente!
-
-```bash
-git remote add origin <URL_DO_SEU_GITHUB>
-git push -u origin master
-```
+**🚀 Relatórios no GitHub Pages**
+Logo após a finalização da suíte de testes (passando ou falhando), a *action* configurada no repositório faz a captura da pasta `cypress/reports/html/`, extrai o Dashboard contendo os passos detalhados e *Screenshots* de erros, e a publica dinamicamente em uma *Branch* de hospedagem (`gh-pages`). 
+Basta acessar o link público do repositório configurado no *Settings* do seu GitHub para visualizar as métricas do último teste rodado!
