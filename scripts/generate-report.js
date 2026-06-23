@@ -10,7 +10,7 @@ if (!fs.existsSync(jsonDir)) {
   console.log("Nenhum JSON encontrado para gerar relatório. Pasta de JSON não existe:", jsonDir);
   process.exit(0);
 }
-
+//script para gerar um relatório HTML visual para os testes.
 report.generate({
   jsonDir: jsonDir,
   reportPath: htmlDir,

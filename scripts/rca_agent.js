@@ -7,7 +7,8 @@ async function runRCA() {
   console.log('🤖 Iniciando Agente de RCA (Root Cause Analysis)...\n');
   console.log('⚡ Conectando ao Ollama (Local LLM)...\n');
 
-  // 1. Load Cypress Cucumber JSON Report
+  // Passo 1: Carregar o Relatório de Testes
+  // O Agente lê o JSON gerado pelo Cypress para entender o que aconteceu na última execução.
   const reportPath = 'cypress/reports/cucumber-json/cucumber-report.json';
   if (!fs.existsSync(reportPath)) {
     console.error(`❌ ERRO: Relatório não encontrado em ${reportPath}. Rode os testes primeiro.`);
@@ -19,7 +20,8 @@ async function runRCA() {
   let failedScenario = null;
   let errorMessage = null;
 
-  // Extract the first failure
+  // Passo 2: Extrair a Falha
+  // O script varre o JSON em busca do primeiro cenário e passo (step) que falharam, capturando a mensagem de erro.
   outerLoop:
   for (const feature of reportData) {
     for (const element of feature.elements || []) {
@@ -42,7 +44,9 @@ async function runRCA() {
   console.log(`🔎 Falha detectada no cenário: "${failedScenario}"`);
   console.log(`🔎 Passo falho: "${failedStep}"`);
 
-  // 2. Get recent Git Changes (to help LLM correlate)
+  // Passo 3: Histórico do Git
+  // Para tentar descobrir a causa raiz, o Agente busca os últimos commits. 
+  // Se alguém alterou um arquivo recentemente, pode ter sido a causa da quebra!
   let gitChanges = '';
   try {
     gitChanges = execSync('git log -2 --stat').toString();
@@ -50,7 +54,8 @@ async function runRCA() {
     gitChanges = 'Não foi possível obter o histórico do git.';
   }
 
-  // 3. Initialize Langchain Ollama Model
+  // Passo 4: Inicializar o LangChain e a Inteligência Artificial (Llama3)
+  // Conecta com o Ollama rodando localmente na máquina, garantindo que nenhum dado sensível vaze para a internet.
   console.log('\n🧠 Analisando os dados com LangChain + Ollama (llama3)...\n');
   
   try {
@@ -80,6 +85,9 @@ REGRAS DA MENSAGEM (Sua resposta deve seguir essa estrutura e ser escrita em Por
 *Causa Raiz provável:* [Use os dados do erro ou das mudanças do git para teorizar por que isso aconteceu]
 *Recomendação de correção:* [Uma recomendação direta para o desenvolvedor ou QA]
 `);
+    
+    // Passo 5: Invocar o Modelo
+    // Junta o Prompt com o Llama3 e envia as variáveis dinâmicas (erro, cenário, histórico do git).
     
     const chain = promptTemplate.pipe(model);
     

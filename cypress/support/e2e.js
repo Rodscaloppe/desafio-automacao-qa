@@ -2,7 +2,7 @@ import 'cypress-axe'
 import './commands'
 
 Cypress.on('uncaught:exception', (err, runnable) => {
-  // returning false here prevents Cypress from
-  // failing the test
+  // retornar falso aqui impede que o Cypress 
+  // falhe o teste devido a exceções não tratadas na aplicação
   return false
 })
