@@ -25,7 +25,7 @@ export default function () {
       };
 
       // When eu envio uma requisição POST para realizar login
-      const res = http.post(`${BASE_URL}/login`, payload);
+      const res = http.post(`${BASE_URL}/api/verifyLogin`, payload);
 
       // Then a resposta deve retornar rapidamente e estar disponível
       check(res, {

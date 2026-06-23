@@ -23,7 +23,7 @@ export default function () {
       };
 
       // When eu realizo a submissão de busca
-      const res = http.post(`${BASE_URL}/products`, payload);
+      const res = http.post(`${BASE_URL}/api/searchProduct`, payload);
 
       // Then o sistema deve aguentar a carga sem erros
       check(res, {
