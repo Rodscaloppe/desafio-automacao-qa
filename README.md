@@ -8,6 +8,7 @@ O framework utiliza **BDD (Behavior-Driven Development)** em todas as suas camad
 
 - **Cypress + Cucumber/Gherkin**: Para os testes de Front-End (E2E).
 - **Multiple Cucumber HTML Reporter**: Geração de dashboard e evidências visuais.
+- **LangChain & Ollama**: Inteligência Artificial local para análise de causa raiz de falhas (RCA) com Llama 3.
 - **k6**: Para testes de Performance e Stress na API.
 - **Pact + Jest**: Para garantir o Contrato (Consumer-Driven Contract Testing) das integrações.
 - **GitHub Actions & GitHub Pages**: Pipeline automatizada (CI/CD) e hospedagem de relatórios na nuvem.
@@ -77,13 +78,42 @@ k6 run performance/login_perf.js
 k6 run performance/search_perf.js
 ```
 
-## ⚙️ CI/CD - GitHub Actions & Relatório Online (Pages)
+### Agente RCA (Análise de Falhas com IA)
+Caso um teste falhe, você pode acionar nosso Agente Investigador que lê os relatórios e logs do Git e tenta deduzir a Causa Raiz do problema.
+Este agente roda **100% localmente** utilizando o Ollama.
+1. Instale o [Ollama](https://ollama.com/) em sua máquina.
+2. Baixe o modelo executando no terminal: `ollama run llama3`
+3. Para rodar a demonstração, primeiro force uma falha e em seguida rode o detetive:
+```bash
+npm run cy:demo-rca
+npm run rca
+```
+Exemplo de saída do Agente RCA:
+```text
+Iniciando Agente de RCA (Root Cause Analysis)...
+
+Conectando ao Ollama (Local LLM)...
+
+Falha detectada no cenário: "Login com credenciais inválidas"
+Passo falho: "Então devo ver uma mensagem de erro de autenticação"
+
+Analisando os dados com LangChain + Ollama (llama3)...
+
+================ RESUMO DA CAUSA RAIZ ================
+ *ALERTA DE FALHA DE TESTE* 
+*Cenário:* Tentar carregar produtos com a API fora do ar (Erro 500)
+*Qual foi o problema:* O Cypress não conseguiu encontrar o elemento `.produto-magico-que-nao-existe` após 1000ms, indicando que o elemento não está presente na página ou a API não está disponível.
+*Causa Raiz provável:* A alteração mais recente no repositório foi a expansão da cobertura de testes com novas características e geração de relatórios HTML para Cucumber. É possível que essa mudança tenha afetado a lógica do teste ou a forma como o Cypress interage com a API.
+*Recomendação de correção:* Verificar se as alterações recentes no repositório afetaram a integração da API e realizar testes manuais para garantir que os elementos estejam presentes na página. Além disso, revisar o código do teste Cypress para garantir que ele esteja lidando corretamente com erros de API.
+======================================================
+```
+##  CI/CD - GitHub Actions & Relatório Online (Pages)
 
 O arquivo `.github/workflows/qa_pipeline.yml` orquestra a execução automatizada. Sempre que houver um `push` ou `pull_request` nas branches principais, o GitHub Actions:
 1. Validará a integridade dos **Contratos (Pact)**.
 2. Isolará a carga verificando os tempos de resposta através da **Performance (K6)**.
 3. Executará os fluxos de Interface em background **(Cypress BDD)**.
 
-**🚀 Relatórios no GitHub Pages**
+** Relatórios no GitHub Pages**
 Logo após a finalização da suíte de testes (passando ou falhando), a *action* configurada no repositório faz a captura da pasta `cypress/reports/html/`, extrai o Dashboard contendo os passos detalhados e *Screenshots* de erros, e a publica dinamicamente em uma *Branch* de hospedagem (`gh-pages`). 
 Basta acessar o link público do repositório configurado no *Settings* do seu GitHub para visualizar as métricas do último teste rodado!
