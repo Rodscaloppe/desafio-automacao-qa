@@ -41,6 +41,7 @@ Atualmente possuímos cobertura automatizada nos seguintes cenários e regras de
 - ✅ **Avaliações (Reviews)** (Publicação de avaliações nas páginas de produtos)
 - ✅ **Logout** (Redirecionamento ao sair do sistema)
 - ♿ **Acessibilidade (A11y)** (Auditoria automática de contraste, semântica e boas práticas WCAG na página inicial e login)
+- 🔄 **Suíte Épica de Regressão (E2E Journey)** (Cenário que cobre a jornada completa de compra, orquestrando o navegador simulando um usuário humano por quase 40 segundos. Engloba o cadastro com Faker, adição de produtos, manipulação de carrinho, validação de checkout, pagamento falso simulado, até exclusão final da conta gerada.)
 
 ## 🚀 Instalação do Ambiente Local
 
