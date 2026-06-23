@@ -9,7 +9,6 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: "https://www.automationexercise.com",
     specPattern: "cypress/e2e/features/**/*.feature",
-    excludeSpecPattern: "cypress/e2e/features/**/*_demo.feature",
     async setupNodeEvents(on, config) {
       await addCucumberPreprocessorPlugin(on, config);
 
