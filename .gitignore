@@ -7,3 +7,4 @@ pacts/
 logs/
 cypress/reports/
 Explicativo.md
+.bin/

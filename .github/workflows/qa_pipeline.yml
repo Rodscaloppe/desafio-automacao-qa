@@ -47,8 +47,11 @@ jobs:
       - name: Install Dependencies
         run: npm ci || npm install
 
-      - name: Formatter Permissions
-        run: chmod +x .bin/cucumber-json-formatter
+      - name: Setup Cucumber Formatter
+        run: |
+          mkdir -p .bin
+          wget -q -O .bin/cucumber-json-formatter https://github.com/cucumber/json-formatter/releases/download/v19.0.0/cucumber-json-formatter-linux-amd64
+          chmod +x .bin/cucumber-json-formatter
 
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
