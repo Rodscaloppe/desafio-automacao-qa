@@ -1,0 +1,53 @@
+import { faker } from '@faker-js/faker';
+
+class LoginPage {
+  visit() {
+    cy.visit('/login');
+  }
+
+  fillSignupFormAndSubmit() {
+    const name = faker.name.firstName();
+    const email = faker.internet.email();
+    
+    cy.get('[data-qa="signup-name"]').type(name);
+    cy.get('[data-qa="signup-email"]').type(email);
+    cy.get('[data-qa="signup-button"]').click();
+    
+    // Complete signup form
+    cy.get('[data-qa="password"]').type('Password123!');
+    cy.get('[data-qa="first_name"]').type(name);
+    cy.get('[data-qa="last_name"]').type(faker.name.lastName());
+    cy.get('[data-qa="address1"]').type('123 Test St');
+    cy.get('[data-qa="country"]').select('United States');
+    cy.get('[data-qa="state"]').type('Test State');
+    cy.get('[data-qa="city"]').type('Test City');
+    cy.get('[data-qa="zipcode"]').type('12345');
+    cy.get('[data-qa="mobile_number"]').type('1234567890');
+    
+    cy.get('[data-qa="create-account"]').click();
+    cy.get('[data-qa="account-created"]').should('be.visible');
+    cy.get('[data-qa="continue-button"]').click();
+  }
+
+  login(email, password) {
+    cy.get('[data-qa="login-email"]').type(email);
+    cy.get('[data-qa="login-password"]').type(password);
+    cy.get('[data-qa="login-button"]').click();
+  }
+
+  verifyLoginError(message) {
+    cy.contains(message).should('be.visible');
+  }
+
+  verifyLoggedIn() {
+    cy.contains('Logged in as').should('be.visible');
+  }
+
+  deleteAccount() {
+    cy.contains('Delete Account').click();
+    cy.get('[data-qa="account-deleted"]').should('be.visible');
+    cy.get('[data-qa="continue-button"]').click();
+  }
+}
+
+export default new LoginPage();
