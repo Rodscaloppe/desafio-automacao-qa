@@ -846,23 +846,18 @@ body.darkmode .navbar-text {
                 
                     
                     
-                        <i class="fa fa-tag fa-lg"></i>
-                        
-                            <span class="tag">@demo</span>
-                        
-                    
                 
             </div>
             <h1>Feature:
-                <small>Teste de Auto Healing do LangGraph</small>
+                <small>Busca de Produtos</small>
             </h1>
             
                 <p>
                <p><strong>File name:</strong>
-                    healing_demo.feature
+                    search.feature
                 </p>
                 <p><strong>Relative path:</strong>
-                    features/healing_demo.feature</p>
+                    features/search.feature</p>
             
         </div>
 
@@ -909,7 +904,7 @@ body.darkmode .navbar-text {
                                 Passed
                             </p>
                         </td>
-                        <td class="percentage">0.00 %</td>
+                        <td class="percentage">100.00 %</td>
                     </tr>
                     <tr>
                         <td>
@@ -923,16 +918,6 @@ body.darkmode .navbar-text {
                     
                     </tr>
                     
-                    
-                    <tr>
-                        <td>
-                            <p data-bs-toggle="tooltip" data-placement="left" title="Scenario is skipped">
-                                <i class="fa fa-arrow-circle-right skipped-color"></i>
-                                Skipped
-                            </p>
-                        </td>
-                        <td class="percentage">100.00 %</td>
-                    </tr>
                     
                 </table>
             </td>
@@ -1056,15 +1041,10 @@ body.darkmode .navbar-text {
                     
                         
                         
-                            <i class="fa fa-tag fa-lg"></i>
-                            
-                                <span class="tag">@demo</span>
-                            
-                        
                     
                 </div>
 
-                <h2>Cenário: <small>Testar o botão de Login</small></h2>
+                <h2>Scenario: <small>Realizar busca de um produto existente</small></h2>
 
                 <ul class="nav navbar-right panel_toolbox">
                     <li>
@@ -1076,13 +1056,13 @@ body.darkmode .navbar-text {
                     
 
                     
+
+                    
+
+                    
                         <li>
-                            <span class="step skipped-background" data-bs-toggle="tooltip" title="Scenario is skipped">3</span>
+                            <span class="step passed-background" data-bs-toggle="tooltip" title="Scenario passed">3</span>
                         </li>
-                    
-
-                    
-
                     
 
                     
@@ -1101,17 +1081,17 @@ body.darkmode .navbar-text {
 
                                 
                                     
-                                        <div class="label" data-bs-toggle="tooltip" data-placement="top" title="Step is skipped">
-                                            <i class="fa fa-arrow-circle-right fa-2x skipped-color"></i>
+                                        <div class="label" title="Success">
+                                            <i class="fa fa-check-circle fa-2x passed-color" data-bs-toggle="tooltip" data-placement="top" title="Step passed"></i>
                                         </div>
                                     
                                 
 
                                 <div class="text">
-                                    <span class="keyword highlight">Dado </span>
+                                    <span class="keyword highlight">Given </span>
 
                                     
-                                        que estou na página inicial do site
+                                        que eu acesso a página de produtos
                                         
                                     
 
@@ -1165,17 +1145,17 @@ body.darkmode .navbar-text {
 
                                 
                                     
-                                        <div class="label" data-bs-toggle="tooltip" data-placement="top" title="Step is skipped">
-                                            <i class="fa fa-arrow-circle-right fa-2x skipped-color"></i>
+                                        <div class="label" title="Success">
+                                            <i class="fa fa-check-circle fa-2x passed-color" data-bs-toggle="tooltip" data-placement="top" title="Step passed"></i>
                                         </div>
                                     
                                 
 
                                 <div class="text">
-                                    <span class="keyword highlight">Quando </span>
+                                    <span class="keyword highlight">When </span>
 
                                     
-                                        eu clico no botão mágico de cadastro
+                                        eu realizo a busca pelo produto "Blue Top"
                                         
                                     
 
@@ -1229,17 +1209,17 @@ body.darkmode .navbar-text {
 
                                 
                                     
-                                        <div class="label" data-bs-toggle="tooltip" data-placement="top" title="Step is skipped">
-                                            <i class="fa fa-arrow-circle-right fa-2x skipped-color"></i>
+                                        <div class="label" title="Success">
+                                            <i class="fa fa-check-circle fa-2x passed-color" data-bs-toggle="tooltip" data-placement="top" title="Step passed"></i>
                                         </div>
                                     
                                 
 
                                 <div class="text">
-                                    <span class="keyword highlight">Então </span>
+                                    <span class="keyword highlight">Then </span>
 
                                     
-                                        a página de login deve abrir
+                                        o produto "Blue Top" deve ser exibido nos resultados
                                         
                                     
 
@@ -1350,10 +1330,10 @@ body.darkmode .navbar-text {
                     ],
                     datasets: [{
                         data: [
-                            0,
-                            0,
-                            0,
                             1,
+                            0,
+                            0,
+                            0,
                             0,
                             0
                         ],
