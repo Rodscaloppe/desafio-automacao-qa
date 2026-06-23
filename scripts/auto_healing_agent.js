@@ -172,7 +172,7 @@ function runCypress(state) {
 
   console.log('➤ [Node] Re-executando o Cypress para validar a cura...');
   try {
-    execSync('npm run cy:run', { stdio: 'inherit' });
+    execSync('npm run cy:run -- --config excludeSpecPattern="[]"', { stdio: 'inherit' });
     console.log('✅ TESTE CURADO COM SUCESSO! A pipeline está verde novamente!');
     return { status: 'SUCCESS' };
   } catch (e) {

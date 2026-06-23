@@ -9,7 +9,7 @@
     "test:contract": "jest contract/",
     "report:generate": "node scripts/generate-report.js",
     "cy:run:report": "npm run cy:run || true && npm run report:generate",
-    "cy:demo-rca": "cypress run --spec cypress/e2e/demo/rca_demo.feature || true",
+    "cy:demo-rca": "cypress run --spec cypress/e2e/features/rca_demo.feature --config excludeSpecPattern=\"[]\" || true",
     "rca": "node scripts/rca_agent.js",
     "heal": "node scripts/auto_healing_agent.js"
   },
