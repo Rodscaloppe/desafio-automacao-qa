@@ -56,7 +56,7 @@ jobs:
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
-          command: npm run cy:run
+          command: npm run cy:run -- --env tags="not @demo"
 
       - name: Generate HTML Report
         if: always()

@@ -1,5 +1,5 @@
 # language: pt
-
+@demo
 Funcionalidade: Teste de Auto Healing do LangGraph
   Cenário: Testar o botão de Login
     Dado que estou na página inicial do site

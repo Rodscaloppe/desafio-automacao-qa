@@ -5,7 +5,7 @@ Given('que estou na página inicial do site', () => {
 });
 
 When('eu clico no botão mágico de cadastro', () => {
-  cy.get('a[href="/login"]').click();
+  cy.get('.botao-magico-de-login-quebrado', { timeout: 1000 }).click();
 });
 
 Then('a página de login deve abrir', () => {
