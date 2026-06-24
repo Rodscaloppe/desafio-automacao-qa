@@ -4,7 +4,7 @@ Este projeto contém a automação de ponta a ponta (E2E) para o site [Automatio
 
 O framework utiliza **BDD (Behavior-Driven Development)** em todas as suas camadas de testes para manter legibilidade e conexão direta com as regras de negócio.
 
-## 🛠 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **Cypress + Cucumber/Gherkin**: Para os testes de Front-End (E2E).
 - **Multiple Cucumber HTML Reporter**: Geração de dashboard e evidências visuais.
@@ -15,7 +15,7 @@ O framework utiliza **BDD (Behavior-Driven Development)** em todas as suas camad
 - **GitHub Actions & GitHub Pages**: Pipeline automatizada (CI/CD) e hospedagem de relatórios na nuvem.
 - **Faker.js**: Geração de massa de dados dinâmicas.
 
-## 🏗 Arquitetura do Projeto
+## Arquitetura do Projeto
 
 ```text
 ├── .github/workflows/  # Pipeline do GitHub Actions (Deploy automático)
@@ -31,30 +31,30 @@ O framework utiliza **BDD (Behavior-Driven Development)** em todas as suas camad
 └── package.json        # Dependências e scripts de execução
 ```
 
-## 📝 Funcionalidades Cobertas (E2E)
+## Funcionalidades Cobertas (E2E)
 
 Atualmente possuímos cobertura automatizada nos seguintes cenários e regras de negócio:
-- ✅ **Login e Cadastro** (Sucesso na criação de conta; Validação de campos obrigatórios do HTML5; Mensagens de erro para e-mail existente)
-- ✅ **Carrinho e Checkout** (Inclusão e persistência do carrinho)
-- ✅ **Busca de Produtos** (Fluxo de busca via barra superior)
-- ✅ **Exceções e Falhas** (Login com credenciais inválidas)
-- ✅ **Fale Conosco** (Envio do formulário de *Contact Us*)
-- ✅ **Newsletter** (Validação de inscrição via rodapé)
-- ✅ **Avaliações (Reviews)** (Publicação de avaliações nas páginas de produtos)
-- ✅ **Logout** (Redirecionamento ao sair do sistema)
-- ♿ **Acessibilidade (A11y)** (Auditoria automática de contraste, semântica e boas práticas WCAG na página inicial e login)
-- 🔄 **Suíte Épica de Regressão (E2E Journey)** (Cenário que cobre a jornada completa de compra, orquestrando o navegador simulando um usuário humano por quase 40 segundos. Engloba o cadastro com Faker, adição de produtos, manipulação de carrinho, validação de checkout, pagamento falso simulado, até exclusão final da conta gerada.)
+- **Login e Cadastro** (Sucesso na criação de conta; Validação de campos obrigatórios do HTML5; Mensagens de erro para e-mail existente)
+- **Carrinho e Checkout** (Inclusão e persistência do carrinho)
+- **Busca de Produtos** (Fluxo de busca via barra superior)
+- **Exceções e Falhas** (Login com credenciais inválidas)
+- **Fale Conosco** (Envio do formulário de *Contact Us*)
+- **Newsletter** (Validação de inscrição via rodapé)
+- **Avaliações (Reviews)** (Publicação de avaliações nas páginas de produtos)
+- **Logout** (Redirecionamento ao sair do sistema)
+- **Acessibilidade (A11y)** (Auditoria automática de contraste, semântica e boas práticas WCAG na página inicial e login)
+- **Suíte Épica de Regressão (E2E Journey)** (Cenário que cobre a jornada completa de compra, orquestrando o navegador simulando um usuário humano por quase 40 segundos. Engloba o cadastro com Faker, adição de produtos, manipulação de carrinho, validação de checkout, pagamento falso simulado, até exclusão final da conta gerada.)
 
-## 📝 Funcionalidades Cobertas (API)
+## Funcionalidades Cobertas (API)
 
 A suíte isolada de backend utiliza **Axios + Jest** para máxima velocidade. Atualmente validamos o ecossistema da API do **Trello** nos seguintes cenários:
-- ✅ **Comportamento Base (200 OK)**: Garantia de disponibilidade do endpoint de Actions e extração de payload aninhado (verificando o valor da estrutura `list.name`).
-- ✅ **Validação de Schema**: Conferência estrita de propriedades obrigatórias (`id`, `type`, `date`, `data.board`, `data.card`) protegendo o contrato de dados.
-- ✅ **Imutabilidade Histórica**: Garantia de que ações já executadas no passado não têm seus atributos alterados indevidamente.
-- ✅ **Tratamento de Exceções (404)**: Simulação da injeção de IDs com formato BSON válido, mas inexistentes, garantindo que a API do Trello recuse com status `404 Not Found` (ao invés de quebrar com erro 500).
-- ⚡ **Threshold de Performance**: Garantia via código de que o endpoint principal responde na casa dos milissegundos (Tempo máximo aceitável < 1000ms).
+- **Comportamento Base (200 OK)**: Garantia de disponibilidade do endpoint de Actions e extração de payload aninhado (verificando o valor da estrutura `list.name`).
+- **Validação de Schema**: Conferência estrita de propriedades obrigatórias (`id`, `type`, `date`, `data.board`, `data.card`) protegendo o contrato de dados.
+- **Imutabilidade Histórica**: Garantia de que ações já executadas no passado não têm seus atributos alterados indevidamente.
+- **Tratamento de Exceções (404)**: Simulação da injeção de IDs com formato BSON válido, mas inexistentes, garantindo que a API do Trello recuse com status `404 Not Found` (ao invés de quebrar com erro 500).
+- **Threshold de Performance**: Garantia via código de que o endpoint principal responde na casa dos milissegundos (Tempo máximo aceitável < 1000ms).
 
-## 🚀 Instalação do Ambiente Local
+## Instalação do Ambiente Local
 
 1. Certifique-se de ter o [Node.js](https://nodejs.org/) instalado (versão **20** ou superior recomendada).
 2. No terminal, execute o comando abaixo para instalar as dependências de E2E e Contrato:
