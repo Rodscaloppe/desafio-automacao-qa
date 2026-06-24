@@ -19,7 +19,8 @@ Given('crio uma conta nova com nome {string}, email randômico e dados completos
   LoginPage.visit();
   
   registeredName = baseName;
-  const email = faker.internet.email();
+  // Adiciona timestamp para garantir 100% de exclusividade e evitar "Email already exist!"
+  const email = `qa_${Date.now()}_${faker.internet.email()}`;
   
   LoginPage.submitSignupStep1(registeredName, email);
   

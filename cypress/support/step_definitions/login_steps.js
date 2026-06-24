@@ -24,7 +24,8 @@ Then('minha conta deve ser deletada no final para limpeza de massa', () => {
 When('inicio o cadastro com um novo e-mail', () => {
   const { faker } = require('@faker-js/faker');
   const name = faker.name.firstName();
-  const email = faker.internet.email();
+  // Timestamp evita colisões e falsos positivos de "Email already exist!"
+  const email = `qa_${Date.now()}_${faker.internet.email()}`;
   LoginPage.submitSignupStep1(name, email);
 });
 

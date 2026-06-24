@@ -7,11 +7,19 @@ class LoginPage {
 
   fillSignupFormAndSubmit() {
     const name = faker.name.firstName();
-    const email = faker.internet.email();
+    // Adiciona timestamp para garantir 100% de exclusividade e evitar "Email already exist!"
+    const email = `qa_${Date.now()}_${faker.internet.email()}`;
 
-    cy.get('[data-qa="signup-name"]').type(name);
-    cy.get('[data-qa="signup-email"]').type(email);
-    cy.get('[data-qa="signup-button"]').click();
+    cy.get('[data-qa="signup-name"]').should('be.visible').type(name);
+    cy.get('[data-qa="signup-email"]').should('be.visible').type(email);
+    // Usa force: true para evitar interceptação de botões por overlays/anúncios
+    cy.get('[data-qa="signup-button"]').should('be.visible').click({ force: true });
+
+    // Ancoragem de falha rápida (Fail Fast): Garante que o sistema não barrou o e-mail
+    cy.contains('Email Address already exist!').should('not.exist');
+    
+    // Ancoragem de roteamento: Garante que avançamos de tela antes de procurar elementos
+    cy.url().should('include', '/signup');
 
     // Complete signup form
     cy.get('[data-qa="password"]').type('Password123!');
@@ -45,6 +53,9 @@ class LoginPage {
 
     // Forçamos o clique caso haja overlays (anúncios) em cima do botão
     cy.get('[data-qa="signup-button"]').should('be.visible').click({ force: true });
+
+    // Ancoragem de falha rápida (Fail Fast): Garante que o sistema não barrou o e-mail
+    cy.contains('Email Address already exist!').should('not.exist');
 
     // Ancoragem de transição: Obrigamos o Cypress a esperar a mudança da rota
     cy.url().should('include', '/signup');
