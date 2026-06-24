@@ -11,11 +11,14 @@
     "report:generate": "node scripts/generate-report.js",
     "cy:run:report": "npm run cy:run || true && npm run report:generate",
     "cy:demo-rca": "cypress run --spec cypress/e2e/demo/rca_demo.feature --config specPattern=\"cypress/e2e/demo/**/*.feature\" || true",
-    "rca": "node scripts/rca_agent.js",
+    "rca": "node cypress/e2e/demo/rca_agent.js",
     "heal": "node scripts/auto_healing_agent.js"
   },
   "cypress-cucumber-preprocessor": {
-    "stepDefinitions": "cypress/support/step_definitions/**/*.js",
+    "stepDefinitions": [
+      "cypress/support/step_definitions/**/*.js",
+      "cypress/e2e/demo/**/*.js"
+    ],
     "json": {
       "enabled": true,
       "output": "cypress/reports/cucumber-json/cucumber-report.json",
