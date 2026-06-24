@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QA Automation Dashboard</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #121212; color: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        h1 { font-size: 2.5rem; margin-bottom: 40px; color: #4CAF50; }
+        .btn-container { display: flex; gap: 20px; }
+        .btn { padding: 15px 30px; font-size: 1.2rem; text-decoration: none; border-radius: 8px; transition: transform 0.2s, background-color 0.2s; font-weight: bold; }
+        .btn-web { background-color: #2b3137; color: #ffffff; border: 2px solid #58a6ff; }
+        .btn-web:hover { background-color: #58a6ff; color: #ffffff; transform: translateY(-3px); }
+        .btn-api { background-color: #2b3137; color: #ffffff; border: 2px solid #ff7b72; }
+        .btn-api:hover { background-color: #ff7b72; color: #ffffff; transform: translateY(-3px); }
+    </style>
+</head>
+<body>
+    <h1>QA Automation Dashboard</h1>
+    <div class="btn-container">
+        <a href="html/index.html" class="btn btn-web">🌐 Testes E2E (Web)</a>
+        <a href="api/index.html" class="btn btn-api">⚡ Testes de API (Jest)</a>
+    </div>
+</body>
+</html>
