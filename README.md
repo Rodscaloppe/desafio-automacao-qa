@@ -19,10 +19,12 @@ O framework utiliza **BDD (Behavior-Driven Development)** em todas as suas camad
 
 ```text
 ├── .github/workflows/  # Pipeline do GitHub Actions (Deploy automático)
+├── api/                # Testes de API Isolados (Axios + Jest)
 ├── contract/           # Testes de Contrato da API (Pact + Jest)
 ├── cypress/            # Testes E2E (BDD com Cucumber e Page Objects)
-│   ├── e2e/features/   # Nossos 10 cenários de testes mapeados
-│   ├── reports/html/   # Relatórios gerados em HTML (evidências)
+│   ├── e2e/features/   # Nossos cenários de testes mapeados
+│   ├── e2e/demo/       # Testes experimentais e demonstrações para IA
+│   ├── reports/        # Relatórios unificados gerados em HTML (Web + API)
 │   └── support/pages/  # Page Object Model (POM)
 ├── performance/        # Scripts K6 de Performance focados na API
 ├── cypress.config.js   # Configuração do Cypress (com screenshots ligados)
@@ -72,6 +74,12 @@ npm run cy:run:report
 Os testes de contrato utilizam o Jest e sobem um mock server do Pact dinamicamente para simular a resposta da API e validar se o contrato definido em código respeita a tipagem esperada.
 ```bash
 npm run test:contract
+```
+
+### Testes de API (Axios + Jest)
+Nós estritamente separamos a validação da interface web (Cypress) da validação técnica do backend (Jest) para garantir ultra performance. Os relatórios de API são mesclados no Dashboard final.
+```bash
+npm run test:api
 ```
 
 ### Testes de Performance (k6)
@@ -137,5 +145,5 @@ O arquivo `.github/workflows/qa_pipeline.yml` orquestra a execução automatizad
 3. Executará os fluxos de Interface em background **(Cypress BDD)**.
 
 ** Relatórios no GitHub Pages**
-Logo após a finalização da suíte de testes (passando ou falhando), a *action* configurada no repositório faz a captura da pasta `cypress/reports/html/`, extrai o Dashboard contendo os passos detalhados e *Screenshots* de erros, e a publica dinamicamente em uma *Branch* de hospedagem (`gh-pages`). 
-Basta acessar o link público do repositório configurado no *Settings* do seu GitHub para visualizar as métricas do último teste rodado!
+Logo após a finalização da suíte de testes (passando ou falhando), a *action* configurada no repositório faz a captura da pasta raiz `cypress/reports/` (que agora contém a Landing Page unificada) e a publica dinamicamente em uma *Branch* de hospedagem (`gh-pages`). 
+Basta acessar o link público do repositório configurado no *Settings* do seu GitHub para acessar o nosso **Dashboard Central**, onde você poderá navegar livremente entre os relatórios **E2E (Web)** e os de **API**.
