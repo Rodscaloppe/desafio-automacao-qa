@@ -19,16 +19,26 @@ O framework utiliza **BDD (Behavior-Driven Development)** em todas as suas camad
 
 ```text
 ├── .github/workflows/  # Pipeline do GitHub Actions (Deploy automático)
-├── api/                # Testes de API Isolados (Axios + Jest)
+├── api/                # Testes de API Isolados (Jest + Axios)
+│   └── collection/     # Collections do Postman e Swagger (Docs/Mocks)
 ├── contract/           # Testes de Contrato da API (Pact + Jest)
 ├── cypress/            # Testes E2E (BDD com Cucumber e Page Objects)
-│   ├── e2e/features/   # Nossos cenários de testes mapeados
-│   ├── e2e/demo/       # Testes experimentais e demonstrações para IA
+│   ├── e2e/
+│   │   ├── features/   # Arquivos de especificações (.feature) separados em subdomínios
+│   │   │   ├── api/    # Cenários focados em integração e fluxos sem UI
+│   │   │   └── web/    # Cenários focados na Interface do Usuário
+│   │   └── demo/       # Testes experimentais e demonstrações para IA
+│   │       ├── features/ # Especificações das Demos
+│   │       └── steps/    # Passos exclusivos para rodar os testes de Demo
 │   ├── reports/        # Relatórios unificados gerados em HTML (Web + API)
-│   └── support/pages/  # Page Object Model (POM)
+│   └── support/        # Código de apoio da automação
+│       ├── pages/             # Page Object Model (POM)
+│       └── step_definitions/  # Implementação dos passos BDD (Glue Code)
 ├── performance/        # Scripts K6 de Performance focados na API
+├── scripts/            # Agentes de Inteligência Artificial e Utilitários de Setup (RCA, Healing, Trello)
 ├── cypress.config.js   # Configuração do Cypress (com screenshots ligados)
 ├── package.json        # Dependências e scripts de execução
+├── SKILL.md            # Manifestos e diretrizes da Agentic AI (Tech Lead QA)
 └── skillUX.md          # Documentação Analítica (Root Cause e Resiliência UX/QA)
 ```
 
@@ -44,6 +54,7 @@ Atualmente possuímos cobertura automatizada nos seguintes cenários e regras de
 - **Avaliações (Reviews)** (Publicação de avaliações nas páginas de produtos)
 - **Logout** (Redirecionamento ao sair do sistema)
 - **Acessibilidade (A11y)** (Auditoria automática de contraste, semântica e boas práticas WCAG na página inicial e login)
+- **Trello Power-Up (BDD)** (Validação comportamental simulando o fluxo de estimativa de camisetas num cartão do Trello via interface gráfica)
 - **Suíte Épica de Regressão (E2E Journey)** (Cenário que cobre a jornada completa de compra, orquestrando o navegador simulando um usuário humano por quase 40 segundos. Engloba o cadastro com Faker, adição de produtos, manipulação de carrinho, validação de checkout, pagamento falso simulado, até exclusão final da conta gerada.)
 
 ## Funcionalidades Cobertas (API)
@@ -54,6 +65,7 @@ A suíte isolada de backend utiliza **Axios + Jest** para máxima velocidade. At
 - **Imutabilidade Histórica**: Garantia de que ações já executadas no passado não têm seus atributos alterados indevidamente.
 - **Tratamento de Exceções (404)**: Simulação da injeção de IDs com formato BSON válido, mas inexistentes, garantindo que a API do Trello recuse com status `404 Not Found` (ao invés de quebrar com erro 500).
 - **Threshold de Performance**: Garantia via código de que o endpoint principal responde na casa dos milissegundos (Tempo máximo aceitável < 1000ms).
+- **Tradução End-to-End do Postman**: Suite de testes automatizados completa (`trello_postman.test.js`) mapeada rigorosamente a partir de uma `Postman Collection` do Trello. Ela realiza o fluxo cascata completo: Criação do Quadro, Criação de Lista, Criação de Cartão e Limpeza via DELETE (teardown).
 
 ## Instalação do Ambiente Local
 
@@ -140,6 +152,16 @@ Nossa arquitetura conta com uma inovação impressionante de "Self-Healing". Cas
 Para ativar o modo de cura em um teste falho, basta rodar:
 ```bash
 npm run heal
+```
+
+### Agente Trello Bug Reporter (Integração Direta)
+Se algum teste quebrar durante o ciclo de QA, você não precisa avisar manualmente a equipe. O **Bug Reporter Agent** intercepta o relatório JSON de falhas gerado pelo Cypress, analisa a causa técnica e submete um formato descritivo legível para a IA local. Em seguida, usando a API do Trello, ele abre um **Bug Ticket (Card)** de forma automática diretamente na coluna "Bugs" configurada no seu `.env`!
+```bash
+# Preparar seu ambiente injetando automaticamente uma lista do Trello no seu .env
+npm run setup-trello
+
+# Para executar o scanner de reports de bugs após uma falha
+npm run report-bug
 ```
 
 ### Agent Skills (Diretrizes para IAs Assistentes)

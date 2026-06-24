@@ -12,7 +12,10 @@
     "cy:run:report": "npm run cy:run || true && npm run report:generate",
     "cy:demo-rca": "cypress run --spec cypress/e2e/demo/rca_demo.feature --config specPattern=\"cypress/e2e/demo/**/*.feature\" || true",
     "rca": "node scripts/rca_agent.js",
-    "heal": "node scripts/auto_healing_agent.js"
+    "heal": "node scripts/auto_healing_agent.js",
+    "report-bug": "node scripts/trello_bug_reporter_agent.js",
+    "setup-trello": "node scripts/setup_trello_board.js",
+    "test:all": "npm run test:api || true && npm run cy:run || true && npm run report:generate"
   },
   "cypress-cucumber-preprocessor": {
     "stepDefinitions": [

@@ -1,8 +1,15 @@
+require('dotenv').config();
 const axios = require('axios');
 
 describe('Trello API - Actions Endpoint', () => {
-  const TRELLO_ACTION_ID = '592f11060f95a3d3d46a987a';
-  const BASE_URL = `https://api.trello.com/1/actions`;
+  const TRELLO_ACTION_ID = process.env.TRELLO_ACTION_ID;
+  const BASE_URL = `${process.env.TRELLO_BASE_URL || 'https://api.trello.com/1'}/actions`;
+
+  beforeAll(() => {
+    if (!TRELLO_ACTION_ID) {
+      throw new Error('FATAL: TRELLO_ACTION_ID não configurado no .env');
+    }
+  });
 
   let response;
 

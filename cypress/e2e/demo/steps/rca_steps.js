@@ -1,5 +1,5 @@
-import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
-import HomePage from '../../support/pages/HomePage';
+const { Given, When, Then } = require('@badeball/cypress-cucumber-preprocessor');
+const HomePage = require('../../../support/pages/HomePage');
 
 Given('que a API de produtos está instável e retornará Erro 500', () => {
   cy.intercept('GET', '**/api/productsList', {
