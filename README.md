@@ -28,7 +28,8 @@ O framework utiliza **BDD (Behavior-Driven Development)** em todas as suas camad
 │   └── support/pages/  # Page Object Model (POM)
 ├── performance/        # Scripts K6 de Performance focados na API
 ├── cypress.config.js   # Configuração do Cypress (com screenshots ligados)
-└── package.json        # Dependências e scripts de execução
+├── package.json        # Dependências e scripts de execução
+└── skillUX.md          # Documentação Analítica (Root Cause e Resiliência UX/QA)
 ```
 
 ## Funcionalidades Cobertas (E2E)
@@ -145,6 +146,14 @@ npm run heal
 O repositório contém um diretório especial `[ .agents/skills/qa-engineering/ ]` dedicado a orquestrar como agentes de Inteligência Artificial (como Copilots e Assistentes de Código) devem se comportar ao interagir com o nosso projeto. 
 - **O que faz:** Ele injeta a persona de um **Tech Lead de QA** na inteligência artificial, forçando-a a adotar princípios rigorosos de qualidade (como aversão a *flaky tests*, foco em prevenção e cobertura de *edge cases*).
 - **Por que:** Quando um dev ou QA utiliza uma IA para gerar novos cenários de testes no repositório, essa *Skill* atua como um "cão de guarda", garantindo que o código gerado respeite automaticamente as nossas padronizações e boas práticas antes de ser sugerido, mantendo a excelência do código.
+
+## 📚 Base de Conhecimento e Resiliência (UX/QA)
+
+Nosso projeto prioriza a experiência do desenvolvedor (UX) e a manutenção limpa da arquitetura de QA. 
+Em nosso repositório incluímos a documentação analítica **[skillUX.md](./skillUX.md)**, que detalha filosofias de blindagem de código e Análise de Causa Raiz.
+- Ela demonstra por que não devemos nos contentar com erros genéricos (ex: *Timeout* 10000ms de Cypress buscando elementos).
+- Ela sugere o uso agressivo de **Âncoras de Previsibilidade** diretamente no *Page Object Model*.
+- **O Resultado:** Ao invés de testes lentos e instáveis (*Flaky Tests*), garantimos testes que "quebram rápido" e de forma exata, fornecendo na saída o erro explícito da Regra de Negócio que foi violada.
 
 ## CI/CD - GitHub Actions & Relatório Online (Pages)
 
