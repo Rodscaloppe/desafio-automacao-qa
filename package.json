@@ -17,7 +17,7 @@
   "cypress-cucumber-preprocessor": {
     "stepDefinitions": [
       "cypress/support/step_definitions/**/*.js",
-      "cypress/e2e/demo/**/*.js"
+      "cypress/e2e/demo/**/*_steps.js"
     ],
     "json": {
       "enabled": true,
