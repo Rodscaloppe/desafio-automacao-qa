@@ -11,7 +11,7 @@
     "report:generate": "node scripts/generate-report.js",
     "cy:run:report": "npm run cy:run || true && npm run report:generate",
     "cy:demo-rca": "cypress run --spec cypress/e2e/demo/rca_demo.feature --config specPattern=\"cypress/e2e/demo/**/*.feature\" || true",
-    "rca": "node cypress/e2e/demo/rca_agent.js",
+    "rca": "node scripts/rca_agent.js",
     "heal": "node scripts/auto_healing_agent.js"
   },
   "cypress-cucumber-preprocessor": {
