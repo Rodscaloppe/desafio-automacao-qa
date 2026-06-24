@@ -45,6 +45,15 @@ Atualmente possuímos cobertura automatizada nos seguintes cenários e regras de
 - ♿ **Acessibilidade (A11y)** (Auditoria automática de contraste, semântica e boas práticas WCAG na página inicial e login)
 - 🔄 **Suíte Épica de Regressão (E2E Journey)** (Cenário que cobre a jornada completa de compra, orquestrando o navegador simulando um usuário humano por quase 40 segundos. Engloba o cadastro com Faker, adição de produtos, manipulação de carrinho, validação de checkout, pagamento falso simulado, até exclusão final da conta gerada.)
 
+## 📝 Funcionalidades Cobertas (API)
+
+A suíte isolada de backend utiliza **Axios + Jest** para máxima velocidade. Atualmente validamos o ecossistema da API do **Trello** nos seguintes cenários:
+- ✅ **Comportamento Base (200 OK)**: Garantia de disponibilidade do endpoint de Actions e extração de payload aninhado (verificando o valor da estrutura `list.name`).
+- ✅ **Validação de Schema**: Conferência estrita de propriedades obrigatórias (`id`, `type`, `date`, `data.board`, `data.card`) protegendo o contrato de dados.
+- ✅ **Imutabilidade Histórica**: Garantia de que ações já executadas no passado não têm seus atributos alterados indevidamente.
+- ✅ **Tratamento de Exceções (404)**: Simulação da injeção de IDs com formato BSON válido, mas inexistentes, garantindo que a API do Trello recuse com status `404 Not Found` (ao invés de quebrar com erro 500).
+- ⚡ **Threshold de Performance**: Garantia via código de que o endpoint principal responde na casa dos milissegundos (Tempo máximo aceitável < 1000ms).
+
 ## 🚀 Instalação do Ambiente Local
 
 1. Certifique-se de ter o [Node.js](https://nodejs.org/) instalado (versão **20** ou superior recomendada).
