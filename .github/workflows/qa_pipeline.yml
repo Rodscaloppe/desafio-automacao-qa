@@ -57,6 +57,10 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           command: npm run cy:run -- --env tags="not @demo"
+          
+      - name: Run API Tests
+        if: always()
+        run: npm run test:api
 
       - name: Generate HTML Report
         if: always()
@@ -67,7 +71,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./cypress/reports/html
+          publish_dir: ./cypress/reports
           publish_branch: gh-pages
 
   performance-tests:
