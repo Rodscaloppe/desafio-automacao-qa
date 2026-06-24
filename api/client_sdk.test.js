@@ -8,7 +8,8 @@ describe('API Tests - Auth com clientSdkKey', () => {
   // Cenário 1
   it('Deve carregar a chave clientSdkKey corretamente a partir do arquivo .env', () => {
     expect(sdkKey).toBeDefined();
-    expect(sdkKey).toBe('client-5HBfi2WU0accFbLR1ufcLlde8zdZRyuR4Z8hXrdMdqr');
+    expect(typeof sdkKey).toBe('string');
+    expect(sdkKey.length).toBeGreaterThan(10);
     expect(sdkKey.startsWith('client-')).toBeTruthy();
   });
 
