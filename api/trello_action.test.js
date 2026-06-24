@@ -64,4 +64,30 @@ describe('Trello API - Actions Endpoint', () => {
     
     expect(duration).toBeLessThan(1000);
   });
+
+  // Cenário 6 (Negativo - Formato Inválido)
+  it('Deve retornar erro 400 (Bad Request) ao consultar um Action ID com formato inválido', async () => {
+    try {
+      // Passando um ID que foge ao padrão hexadecimal de 24 caracteres do MongoDB/Trello
+      await axios.get(`${BASE_URL}/id_invalido_123`);
+      expect(true).toBe(false);
+    } catch (error) {
+      expect(error.response.status).toBe(400);
+      expect(error.response.data).toContain('invalid id');
+    }
+  });
+
+  // Cenário 7 (Verificação de Relacionamento Aninhado)
+  it('Deve conter as propriedades do usuário criador (memberCreator) com formato correto', () => {
+    const member = response.data.memberCreator;
+    
+    expect(member).toBeDefined();
+    expect(member).toHaveProperty('id');
+    expect(member).toHaveProperty('username');
+    expect(member).toHaveProperty('fullName');
+    
+    // Garantir que os campos vitais não são nulos ou vazios
+    expect(member.id.length).toBeGreaterThan(0);
+    expect(member.username).not.toBeNull();
+  });
 });
