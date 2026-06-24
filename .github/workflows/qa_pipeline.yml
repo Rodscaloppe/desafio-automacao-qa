@@ -61,6 +61,11 @@ jobs:
       - name: Run API Tests
         if: always()
         run: npm run test:api
+        env:
+          TRELLO_API_KEY: ${{ secrets.TRELLO_API_KEY }}
+          TRELLO_API_TOKEN: ${{ secrets.TRELLO_API_TOKEN }}
+          TRELLO_ACTION_ID: ${{ secrets.TRELLO_ACTION_ID }}
+          CLIENT_SDK_KEY: ${{ secrets.CLIENT_SDK_KEY }}
 
       - name: Generate HTML Report
         if: always()
