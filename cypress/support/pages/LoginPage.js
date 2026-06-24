@@ -47,18 +47,20 @@ class LoginPage {
     cy.contains(message).should('be.visible');
   }
 
-  submitSignupStep1(name, email) {
+  submitSignupStep1(name, email, expectSuccess = true) {
     cy.get('[data-qa="signup-name"]').should('be.visible').type(name);
     cy.get('[data-qa="signup-email"]').should('be.visible').type(email);
 
     // Forçamos o clique caso haja overlays (anúncios) em cima do botão
     cy.get('[data-qa="signup-button"]').should('be.visible').click({ force: true });
 
-    // Ancoragem de falha rápida (Fail Fast): Garante que o sistema não barrou o e-mail
-    cy.contains('Email Address already exist!').should('not.exist');
+    if (expectSuccess) {
+      // Ancoragem de falha rápida (Fail Fast): Garante que o sistema não barrou o e-mail
+      cy.contains('Email Address already exist!').should('not.exist');
 
-    // Ancoragem de transição: Obrigamos o Cypress a esperar a mudança da rota
-    cy.url().should('include', '/signup');
+      // Ancoragem de transição: Obrigamos o Cypress a esperar a mudança da rota
+      cy.url().should('include', '/signup');
+    }
   }
 
   verifySignupError(message) {

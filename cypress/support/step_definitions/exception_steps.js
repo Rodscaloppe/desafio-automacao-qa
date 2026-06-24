@@ -13,7 +13,7 @@ Then('devo ver a mensagem de erro {string}', (message) => {
 
 // Ação: Tenta burlar o sistema cadastrando um e-mail que já foi injetado previamente no banco
 When('tento me cadastrar com um e-mail já existente {string}', (email) => {
-  LoginPage.submitSignupStep1('Usuario Teste', email);
+  LoginPage.submitSignupStep1('Usuario Teste', email, false);
 });
 
 // Validação: Verifica se o sistema blindou o cadastro duplicado e disparou o alerta no formulário
