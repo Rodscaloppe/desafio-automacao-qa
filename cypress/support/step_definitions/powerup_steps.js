@@ -19,9 +19,9 @@ Given('que eu estou com um cartão aberto', () => {
   cy.log('Mock: Cartão aberto via interface ou Deep Link');
 });
 
-When('eu clico no botão "Estimate Size"', () => {
-  cy.log(`Mock: Clicando no botão "Estimate Size"`);
-  // cy.contains('.button', "Estimate Size").click();
+When('eu clico no botão {string}', (buttonText) => {
+  cy.log(`Mock: Clicando no botão "${buttonText}"`);
+  // cy.contains('.button', buttonText).click();
 });
 
 Then('o Trello deve abrir um popup intitulado {string}', (popupTitle) => {

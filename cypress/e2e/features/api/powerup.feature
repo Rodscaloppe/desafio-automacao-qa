@@ -14,14 +14,22 @@ Feature: Power-Up de Estimativa de Tamanho (Trello)
     Then o Trello deve abrir um popup intitulado "Estimation"
     And o popup deve conter um formulário com um select listando as opções "Small", "Medium", "Large" e "Extra Large"
 
-  Scenario: Validar persistência da estimativa no contexto do cartão (Salvar Dados)
+  Scenario Outline: Validar persistência da estimativa no contexto do cartão (Salvar Dados)
     Given que eu abri o popup de estimativa de um cartão sem estimativa prévia
-    When eu seleciono a opção "Medium 👚" no campo "Estimate"
+    When eu seleciono a opção "<opcao>" no campo "Estimate"
     And clico no botão primário "Save"
     Then o popup de estimativa deve ser fechado automaticamente
-    And os dados de plugin (pluginData) do cartão devem armazenar a estimativa "medium" em escopo "shared"
+    And os dados de plugin (pluginData) do cartão devem armazenar a estimativa "<valor_salvo>" em escopo "shared"
 
-  Scenario: Validar re-hidratação de dados salvos ao reabrir o popup
-    Given que o cartão atual possui a estimativa "large" armazenada no pluginData
+    Examples:
+      | opcao     | valor_salvo |
+      | Medium 👚 | medium      |
+
+  Scenario Outline: Validar re-hidratação de dados salvos ao reabrir o popup
+    Given que o cartão atual possui a estimativa "<valor_salvo>" armazenada no pluginData
     When eu clico no botão "Estimate Size" para reabrir o popup
-    Then o campo select do popup já deve vir com a opção "Large 👔" pré-selecionada
+    Then o campo select do popup já deve vir com a opção "<opcao_esperada>" pré-selecionada
+
+    Examples:
+      | valor_salvo | opcao_esperada |
+      | large       | Large 👔       |
