@@ -10,7 +10,6 @@
     "test:api": "jest api/ --config jest.api.config.js",
     "report:generate": "node scripts/generateReport.js",
     "cy:run:report": "npm run cy:run || true && npm run report:generate",
-    "cy:demo-rca": "cypress run --spec cypress/e2e/demo/features/rcaDemo.feature --config specPattern=\"cypress/e2e/demo/**/*.feature\" || true",
     "rca": "node scripts/rcaAgent.js",
     "heal": "node scripts/autoHealingAgent.js",
     "report-bug": "node scripts/trelloBugReporterAgent.js",
@@ -19,8 +18,7 @@
   },
   "cypress-cucumber-preprocessor": {
     "stepDefinitions": [
-      "cypress/support/step_definitions/**/*.js",
-      "cypress/e2e/demo/**/*Steps.js"
+      "cypress/support/stepDefinitions/**/*.js"
     ],
     "json": {
       "enabled": true,

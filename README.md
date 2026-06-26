@@ -24,16 +24,13 @@ O framework utiliza **BDD (Behavior-Driven Development)** em todas as suas camad
 ├── contract/           # Testes de Contrato da API (Pact + Jest)
 ├── cypress/            # Testes E2E (BDD com Cucumber e Page Objects)
 │   ├── e2e/
-│   │   ├── features/   # Arquivos de especificações (.feature) separados em subdomínios
-│   │   │   ├── api/    # Cenários focados em integração e fluxos sem UI
-│   │   │   └── web/    # Cenários focados na Interface do Usuário
-│   │   └── demo/       # Testes experimentais e demonstrações para IA
-│   │       ├── features/ # Especificações das Demos
-│   │       └── steps/    # Passos exclusivos para rodar os testes de Demo
+│   │   └── features/   # Arquivos de especificações (.feature) separados em subdomínios
+│   │       ├── api/    # Cenários focados em integração e fluxos sem UI
+│   │       └── web/    # Cenários focados na Interface do Usuário
 │   ├── reports/        # Relatórios unificados gerados em HTML (Web + API)
 │   └── support/        # Código de apoio da automação
 │       ├── pages/             # Page Object Model (POM)
-│       └── step_definitions/  # Implementação dos passos BDD (Glue Code)
+│       └── stepDefinitions/   # Implementação dos passos BDD (Glue Code)
 ├── performance/        # Scripts K6 de Performance focados na API
 ├── scripts/            # Agentes de Inteligência Artificial e Utilitários de Setup (RCA, Healing, Trello)
 ├── cypress.config.js   # Configuração do Cypress (com screenshots ligados)
@@ -107,8 +104,8 @@ npm run test:api
 ### Testes de Performance (k6)
 No terminal, basta invocar a CLI do K6 apontando para o script desejado.
 ```bash
-k6 run performance/login_perf.js
-k6 run performance/search_perf.js
+k6 run performance/loginPerf.js
+k6 run performance/searchPerf.js
 ```
 
 ### Agente RCA (Análise de Falhas com IA)
@@ -118,7 +115,6 @@ Este agente roda **100% localmente** utilizando o Ollama.
 2. Baixe o modelo executando no terminal: `ollama run llama3`
 3. Para rodar a demonstração, primeiro force uma falha e em seguida rode o detetive:
 ```bash
-npm run cy:demo-rca
 npm run rca
 ```
 Exemplo de saída do Agente RCA:
