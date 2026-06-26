@@ -16,7 +16,7 @@ Then('eu não devo encontrar violações críticas de acessibilidade', () => {
   // Configurando o axe para reportar violações no Cypress Log, mas sem quebrar a pipeline (skipFailures: true)
   cy.checkA11y(null, {
     includedImpacts: ['critical', 'serious']
-  }, null, true);
+  }, null, false);
 });
 
 // Acessa a página de autenticação e injeta a biblioteca de auditoria visual
@@ -34,5 +34,5 @@ When('a tela de autenticação estiver visível', () => {
 Then('eu não devo encontrar violações críticas de acessibilidade na tela de login', () => {
   cy.checkA11y(null, {
     includedImpacts: ['critical', 'serious']
-  }, null, true);
+  }, null, false);
 });
