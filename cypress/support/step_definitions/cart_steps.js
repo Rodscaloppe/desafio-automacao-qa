@@ -26,8 +26,8 @@ When('navego para a tela de pagamento', () => {
 });
 
 // Validação: Garante que o produto selecionado foi transportado corretamente para a página de checkout
-Then('eu devo validar se os produtos do carrinho estão corretos na tela de checkout', () => {
-  CheckoutPage.verifyProductInCheckout('Blue Top');
+Then('eu devo validar se o produto {string} está correto na tela de checkout', (productName) => {
+  CheckoutPage.verifyProductInCheckout(productName);
 });
 
 // Pós-condição: Apaga a conta recém criada para evitar poluição do banco de dados (Clean State)
