@@ -5,36 +5,38 @@ class LoginPage {
     cy.visit('/login');
   }
 
+  completeSignupForm(firstName, options = {}) {
+    const lastName = options.lastName || faker.name.lastName();
+    const address = options.address || '123 Test St';
+    const country = options.country || 'United States';
+    const state = options.state || 'Test State';
+    const city = options.city || 'Test City';
+    const zipcode = options.zipcode || '12345';
+    const mobileNumber = options.mobileNumber || '1234567890';
+    const password = options.password || 'Password123!';
+
+    cy.get('[data-qa="password"]').type(password);
+    cy.get('[data-qa="first_name"]').type(firstName);
+    cy.get('[data-qa="last_name"]').type(lastName);
+    cy.get('[data-qa="address"]').type(address);
+    cy.get('[data-qa="country"]').select(country);
+    cy.get('[data-qa="state"]').type(state);
+    cy.get('[data-qa="city"]').type(city);
+    cy.get('[data-qa="zipcode"]').type(zipcode);
+    cy.get('[data-qa="mobile_number"]').type(mobileNumber);
+
+    cy.get('[data-qa="create-account"]').click();
+    cy.get('[data-qa="account-created"]').should('be.visible');
+    cy.get('[data-qa="continue-button"]').click();
+  }
+
   fillSignupFormAndSubmit() {
     const name = faker.name.firstName();
     // Adiciona timestamp para garantir 100% de exclusividade e evitar "Email already exist!"
     const email = `qa_${Date.now()}_${faker.internet.email()}`;
 
-    cy.get('[data-qa="signup-name"]').should('be.visible').type(name);
-    cy.get('[data-qa="signup-email"]').should('be.visible').type(email);
-    // Usa force: true para evitar interceptação de botões por overlays/anúncios
-    cy.get('[data-qa="signup-button"]').should('be.visible').click({ force: true });
-
-    // Ancoragem de falha rápida (Fail Fast): Garante que o sistema não barrou o e-mail
-    cy.contains('Email Address already exist!').should('not.exist');
-    
-    // Ancoragem de roteamento: Garante que avançamos de tela antes de procurar elementos
-    cy.url().should('include', '/signup');
-
-    // Complete signup form
-    cy.get('[data-qa="password"]').type('Password123!');
-    cy.get('[data-qa="first_name"]').type(name);
-    cy.get('[data-qa="last_name"]').type(faker.name.lastName());
-    cy.get('[data-qa="address"]').type('123 Test St');
-    cy.get('[data-qa="country"]').select('United States');
-    cy.get('[data-qa="state"]').type('Test State');
-    cy.get('[data-qa="city"]').type('Test City');
-    cy.get('[data-qa="zipcode"]').type('12345');
-    cy.get('[data-qa="mobile_number"]').type('1234567890');
-
-    cy.get('[data-qa="create-account"]').click();
-    cy.get('[data-qa="account-created"]').should('be.visible');
-    cy.get('[data-qa="continue-button"]').click();
+    this.submitSignupStep1(name, email);
+    this.completeSignupForm(name);
   }
 
   login(email, password) {
@@ -47,9 +49,17 @@ class LoginPage {
     cy.contains(message).should('be.visible');
   }
 
-  submitSignupStep1(name, email, expectSuccess = true) {
+  fillSignupName(name) {
     cy.get('[data-qa="signup-name"]').should('be.visible').type(name);
+  }
+
+  fillSignupEmail(email) {
     cy.get('[data-qa="signup-email"]').should('be.visible').type(email);
+  }
+
+  submitSignupStep1(name, email, expectSuccess = true) {
+    if (name) cy.get('[data-qa="signup-name"]').should('be.visible').type(name);
+    if (email) cy.get('[data-qa="signup-email"]').should('be.visible').type(email);
 
     // Forçamos o clique caso haja overlays (anúncios) em cima do botão
     cy.get('[data-qa="signup-button"]').should('be.visible').click({ force: true });

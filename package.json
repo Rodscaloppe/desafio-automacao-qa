@@ -8,19 +8,17 @@
     "cy:run": "cypress run",
     "test:contract": "jest contract/",
     "test:api": "jest api/ --config jest.api.config.js",
-    "report:generate": "node scripts/generate-report.js",
+    "report:generate": "node scripts/generateReport.js",
     "cy:run:report": "npm run cy:run || true && npm run report:generate",
-    "cy:demo-rca": "cypress run --spec cypress/e2e/demo/rca_demo.feature --config specPattern=\"cypress/e2e/demo/**/*.feature\" || true",
-    "rca": "node scripts/rca_agent.js",
-    "heal": "node scripts/auto_healing_agent.js",
-    "report-bug": "node scripts/trello_bug_reporter_agent.js",
-    "setup-trello": "node scripts/setup_trello_board.js",
+    "rca": "node scripts/rcaAgent.js",
+    "heal": "node scripts/autoHealingAgent.js",
+    "report-bug": "node scripts/trelloBugReporterAgent.js",
+    "setup-trello": "node scripts/setupTrelloBoard.js",
     "test:all": "npm run test:api || true && npm run cy:run || true && npm run report:generate"
   },
   "cypress-cucumber-preprocessor": {
     "stepDefinitions": [
-      "cypress/support/step_definitions/**/*.js",
-      "cypress/e2e/demo/**/*_steps.js"
+      "cypress/support/stepDefinitions/**/*.js"
     ],
     "json": {
       "enabled": true,
@@ -45,7 +43,6 @@
     "cypress": "^15.18.0",
     "cypress-axe": "^1.7.0",
     "esbuild": "^0.28.1",
-    "faker": "^5.5.3",
     "jest": "^30.4.2",
     "jest-html-reporter": "^4.4.0",
     "multiple-cucumber-html-reporter": "^3.10.0"
