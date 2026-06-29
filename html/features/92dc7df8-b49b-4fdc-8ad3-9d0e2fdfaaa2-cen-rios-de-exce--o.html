@@ -849,15 +849,15 @@ body.darkmode .navbar-text {
                 
             </div>
             <h1>Feature:
-                <small>Fale Conosco</small>
+                <small>Cenários de Exceção</small>
             </h1>
             
                 <p>
                <p><strong>File name:</strong>
-                    contact.feature
+                    exception.feature
                 </p>
                 <p><strong>Relative path:</strong>
-                    web/contact.feature</p>
+                    web/exception.feature</p>
             
         </div>
 
@@ -1044,7 +1044,7 @@ body.darkmode .navbar-text {
                     
                 </div>
 
-                <h2>Scenario: <small>Enviar formulário de contato com sucesso</small></h2>
+                <h2>Scenario Outline: <small>Login com credenciais inválidas</small></h2>
 
                 <ul class="nav navbar-right panel_toolbox">
                     <li>
@@ -1155,7 +1155,7 @@ body.darkmode .navbar-text {
                                     <span class="keyword highlight">When </span>
 
                                     
-                                        eu clico em "Contact Us"
+                                        eu navego para a página de login/signup
                                         
                                     
 
@@ -1219,7 +1219,7 @@ body.darkmode .navbar-text {
                                     <span class="keyword highlight">And </span>
 
                                     
-                                        preencho o formulário de contato com dados válidos e envio
+                                        tento logar com o email "email_invalido@teste.com" e senha "senha_errada"
                                         
                                     
 
@@ -1283,7 +1283,7 @@ body.darkmode .navbar-text {
                                     <span class="keyword highlight">Then </span>
 
                                     
-                                        eu devo ver a mensagem de sucesso "Success! Your details have been submitted successfully."
+                                        devo ver a mensagem de erro "Your email or password is incorrect!"
                                         
                                     
 

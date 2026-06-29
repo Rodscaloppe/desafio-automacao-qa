@@ -849,17 +849,15 @@ body.darkmode .navbar-text {
                 
             </div>
             <h1>Feature:
-                <small>Acessibilidade do Automation Exercise</small>
+                <small>Busca de Produtos</small>
             </h1>
             
                 <p>
-                    <strong>Description: </strong>   Como um usuário da plataforma<br>  Quero garantir que as páginas sejam acessíveis para todos<br>  Para que possamos seguir as diretrizes WCAG </p>
-                
                <p><strong>File name:</strong>
-                    a11y.feature
+                    search.feature
                 </p>
                 <p><strong>Relative path:</strong>
-                    web/a11y.feature</p>
+                    web/search.feature</p>
             
         </div>
 
@@ -895,7 +893,7 @@ body.darkmode .navbar-text {
         <tr>
             <td class="chart">
                 <canvas id="scenario-chart"></canvas>
-                <div class="total">2</div>
+                <div class="total">1</div>
             </td>
             <td>
                 <table class="tile_info">
@@ -1046,7 +1044,7 @@ body.darkmode .navbar-text {
                     
                 </div>
 
-                <h2>Cenário: <small>Validar acessibilidade na página inicial</small></h2>
+                <h2>Scenario Outline: <small>Realizar busca de um produto existente</small></h2>
 
                 <ul class="nav navbar-right panel_toolbox">
                     <li>
@@ -1090,10 +1088,10 @@ body.darkmode .navbar-text {
                                 
 
                                 <div class="text">
-                                    <span class="keyword highlight">Dado </span>
+                                    <span class="keyword highlight">Given </span>
 
                                     
-                                        que eu navego para a página inicial
+                                        que eu acesso a página de produtos
                                         
                                     
 
@@ -1154,10 +1152,10 @@ body.darkmode .navbar-text {
                                 
 
                                 <div class="text">
-                                    <span class="keyword highlight">Quando </span>
+                                    <span class="keyword highlight">When </span>
 
                                     
-                                        a página carregar completamente
+                                        eu realizo a busca pelo produto "Blue Top"
                                         
                                     
 
@@ -1218,249 +1216,10 @@ body.darkmode .navbar-text {
                                 
 
                                 <div class="text">
-                                    <span class="keyword highlight">Então </span>
+                                    <span class="keyword highlight">Then </span>
 
                                     
-                                        eu não devo encontrar violações críticas de acessibilidade
-                                        
-                                    
-
-                                    
-
-                                </div>
-
-                                
-                                    
-
-                                    
-
-                                    
-
-                                    
-
-                                    
-
-                                    
-
-                                    
-
-                                    
-                                
-                            </div>
-
-                        
-                            
-
-                            
-
-                            
-
-                            
-
-                            
-
-                            
-
-                            
-                        
-
-                        
-                            
-                        
-
-                    
-                
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel" style="height: auto;">
-            <div class="x_title">
-
-                <div class="tags">
-                    
-                        
-                        
-                    
-                </div>
-
-                <h2>Cenário: <small>Validar acessibilidade na página de login</small></h2>
-
-                <ul class="nav navbar-right panel_toolbox">
-                    <li>
-                        <a class="collapse-link"><i class="fa fa-chevron-down"></i></a>
-                    </li>
-
-                    
-
-                    
-
-                    
-
-                    
-
-                    
-                        <li>
-                            <span class="step passed-background" data-bs-toggle="tooltip" title="Scenario passed">3</span>
-                        </li>
-                    
-
-                    
-
-                    
-                </ul>
-
-                <div class="clearfix"></div>
-            </div>
-
-            <div class="x_content" style="display: none;">
-                <div class="scenario-step-container"></div>
-                    
-                        
-                            <div class="scenario-step-container">
-
-                                
-                                    
-                                        <div class="label" title="Success">
-                                            <i class="fa fa-check-circle fa-2x passed-color" data-bs-toggle="tooltip" data-placement="top" title="Step passed"></i>
-                                        </div>
-                                    
-                                
-
-                                <div class="text">
-                                    <span class="keyword highlight">Dado </span>
-
-                                    
-                                        que eu navego para a página de login
-                                        
-                                    
-
-                                    
-
-                                </div>
-
-                                
-                                    
-
-                                    
-
-                                    
-
-                                    
-
-                                    
-
-                                    
-
-                                    
-
-                                    
-                                
-                            </div>
-
-                        
-                            
-
-                            
-
-                            
-
-                            
-
-                            
-
-                            
-
-                            
-                        
-
-                        
-                            
-                        
-
-                    
-                
-                        
-                            <div class="scenario-step-container">
-
-                                
-                                    
-                                        <div class="label" title="Success">
-                                            <i class="fa fa-check-circle fa-2x passed-color" data-bs-toggle="tooltip" data-placement="top" title="Step passed"></i>
-                                        </div>
-                                    
-                                
-
-                                <div class="text">
-                                    <span class="keyword highlight">Quando </span>
-
-                                    
-                                        a tela de autenticação estiver visível
-                                        
-                                    
-
-                                    
-
-                                </div>
-
-                                
-                                    
-
-                                    
-
-                                    
-
-                                    
-
-                                    
-
-                                    
-
-                                    
-
-                                    
-                                
-                            </div>
-
-                        
-                            
-
-                            
-
-                            
-
-                            
-
-                            
-
-                            
-
-                            
-                        
-
-                        
-                            
-                        
-
-                    
-                
-                        
-                            <div class="scenario-step-container">
-
-                                
-                                    
-                                        <div class="label" title="Success">
-                                            <i class="fa fa-check-circle fa-2x passed-color" data-bs-toggle="tooltip" data-placement="top" title="Step passed"></i>
-                                        </div>
-                                    
-                                
-
-                                <div class="text">
-                                    <span class="keyword highlight">Então </span>
-
-                                    
-                                        eu não devo encontrar violações críticas de acessibilidade na tela de login
+                                        o produto "Blue Top" deve ser exibido nos resultados
                                         
                                     
 
@@ -1571,7 +1330,7 @@ body.darkmode .navbar-text {
                     ],
                     datasets: [{
                         data: [
-                            2,
+                            1,
                             0,
                             0,
                             0,

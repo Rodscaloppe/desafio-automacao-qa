@@ -849,15 +849,15 @@ body.darkmode .navbar-text {
                 
             </div>
             <h1>Feature:
-                <small>Carrinho e Checkout</small>
+                <small>Adicionar Avaliação a Produto</small>
             </h1>
             
                 <p>
                <p><strong>File name:</strong>
-                    cart.feature
+                    review.feature
                 </p>
                 <p><strong>Relative path:</strong>
-                    web/cart.feature</p>
+                    web/review.feature</p>
             
         </div>
 
@@ -1044,7 +1044,7 @@ body.darkmode .navbar-text {
                     
                 </div>
 
-                <h2>Scenario: <small>Incluir produto no carrinho e validar na tela de pagamento</small></h2>
+                <h2>Scenario Outline: <small>Avaliar um produto com sucesso</small></h2>
 
                 <ul class="nav navbar-right panel_toolbox">
                     <li>
@@ -1091,7 +1091,7 @@ body.darkmode .navbar-text {
                                     <span class="keyword highlight">Given </span>
 
                                     
-                                        que eu possuo uma conta logada
+                                        que eu acesso a página inicial
                                         
                                     
 
@@ -1155,7 +1155,7 @@ body.darkmode .navbar-text {
                                     <span class="keyword highlight">When </span>
 
                                     
-                                        eu adiciono o produto "Blue Top" ao carrinho
+                                        eu clico no primeiro produto listado
                                         
                                     
 
@@ -1219,7 +1219,71 @@ body.darkmode .navbar-text {
                                     <span class="keyword highlight">And </span>
 
                                     
-                                        navego para a tela de pagamento
+                                        preencho o formulário de avaliação com nome, email e comentário
+                                        
+                                    
+
+                                    
+
+                                </div>
+
+                                
+                                    
+
+                                    
+
+                                    
+
+                                    
+
+                                    
+
+                                    
+
+                                    
+
+                                    
+                                
+                            </div>
+
+                        
+                            
+
+                            
+
+                            
+
+                            
+
+                            
+
+                            
+
+                            
+                        
+
+                        
+                            
+                        
+
+                    
+                
+                        
+                            <div class="scenario-step-container">
+
+                                
+                                    
+                                        <div class="label" title="Success">
+                                            <i class="fa fa-check-circle fa-2x passed-color" data-bs-toggle="tooltip" data-placement="top" title="Step passed"></i>
+                                        </div>
+                                    
+                                
+
+                                <div class="text">
+                                    <span class="keyword highlight">And </span>
+
+                                    
+                                        envio a avaliação
                                         
                                     
 
@@ -1283,71 +1347,7 @@ body.darkmode .navbar-text {
                                     <span class="keyword highlight">Then </span>
 
                                     
-                                        eu devo validar se os produtos do carrinho estão corretos na tela de checkout
-                                        
-                                    
-
-                                    
-
-                                </div>
-
-                                
-                                    
-
-                                    
-
-                                    
-
-                                    
-
-                                    
-
-                                    
-
-                                    
-
-                                    
-                                
-                            </div>
-
-                        
-                            
-
-                            
-
-                            
-
-                            
-
-                            
-
-                            
-
-                            
-                        
-
-                        
-                            
-                        
-
-                    
-                
-                        
-                            <div class="scenario-step-container">
-
-                                
-                                    
-                                        <div class="label" title="Success">
-                                            <i class="fa fa-check-circle fa-2x passed-color" data-bs-toggle="tooltip" data-placement="top" title="Step passed"></i>
-                                        </div>
-                                    
-                                
-
-                                <div class="text">
-                                    <span class="keyword highlight">And </span>
-
-                                    
-                                        a conta deve ser deletada no final para limpeza de massa
+                                        eu devo ver a mensagem de confirmação de avaliação "Thank you for your review."
                                         
                                     
 
