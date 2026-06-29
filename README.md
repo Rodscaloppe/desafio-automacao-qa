@@ -136,16 +136,16 @@ Analisando os dados com LangChain + Ollama (llama3)...
 *Recomendação de correção:* Verificar se as alterações recentes no repositório afetaram a integração da API e realizar testes manuais para garantir que os elementos estejam presentes na página. Além disso, revisar o código do teste Cypress para garantir que ele esteja lidando corretamente com erros de API.
 ======================================================
 ```
-```
-
 ### Agente Auto-Healing (Cura Automática de Seletores)
-Nossa arquitetura conta com uma inovação impressionante de "Self-Healing". Caso o Cypress quebre devido a um seletor não encontrado (por exemplo, um dev alterou um atributo HTML de um botão), nosso Agente LangGraph entra em ação:
+
+Nossa arquitetura conta com "Self-Healing". 
+Caso o Cypress quebre devido a um seletor não encontrado (por exemplo, um dev alterou um atributo HTML de um botão), nosso Agente LangGraph entra em ação:
 1. Ele coleta o HTML minificado do momento da falha.
 2. Injeta o erro no Llama3 pedindo a localização do novo seletor no DOM.
 3. **Edita localmente o código fonte** do seu Step Definition.
 4. Roda o Cypress sozinho para re-validar e deixar o teste verde!
-
 Para ativar o modo de cura em um teste falho, basta rodar:
+
 ```bash
 npm run heal
 ```
@@ -180,6 +180,7 @@ O arquivo `.github/workflows/qa_pipeline.yml` orquestra a execução automatizad
 2. Isolará a carga verificando os tempos de resposta através da **Performance (K6)**.
 3. Executará os fluxos de Interface em background **(Cypress BDD)**.
 
-** Relatórios no GitHub Pages**
+ Relatórios no GitHub Pages
+ 
 Logo após a finalização da suíte de testes (passando ou falhando), a *action* configurada no repositório faz a captura da pasta raiz `cypress/reports/` (que agora contém a Landing Page unificada) e a publica dinamicamente em uma *Branch* de hospedagem (`gh-pages`). 
 Basta acessar o link público do repositório configurado no *Settings* do seu GitHub para acessar o nosso **Dashboard Central**, onde você poderá navegar livremente entre os relatórios **E2E (Web)** e os de **API**.
